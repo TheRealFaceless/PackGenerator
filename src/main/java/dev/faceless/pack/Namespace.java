@@ -19,6 +19,7 @@ public final class Namespace {
     private final TextureRegistry      textures;
     private final FontRegistry         fonts;
     private final ItemRegistry         items;
+    private final SoundRegistry        sounds;
 
     Namespace(String id) {
         this.id          = id;
@@ -27,6 +28,7 @@ public final class Namespace {
         this.textures    = new TextureRegistry();
         this.fonts       = new FontRegistry();
         this.items       = new ItemRegistry();
+        this.sounds      = new SoundRegistry();
     }
 
     public String getId() { return id; }
@@ -52,11 +54,15 @@ public final class Namespace {
      */
     public ItemRegistry items()             { return items; }
 
+    /** Sound definitions under assets/<ns>/sounds.json and audio assets inside assets/<ns>/sounds/ */
+    public SoundRegistry sounds() { return sounds; }
+
     void export(Path namespaceRoot) throws IOException {
         blockstates.export(namespaceRoot.resolve("blockstates"));
         models.export(namespaceRoot.resolve("models"));
         textures.export(namespaceRoot.resolve("textures"));
         fonts.export(namespaceRoot.resolve("font"));
         items.export(namespaceRoot.resolve("items"));
+        sounds.export(namespaceRoot);
     }
 }
